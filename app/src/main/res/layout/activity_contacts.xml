@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorOldBG"
+    android:background="@color/BGcolor"
     android:orientation="vertical"
     tools:context=".ContactsActivity">
+
+    <TextView
+        style="@style/ColorThemeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/contacts"
+        android:textSize="46sp" />
 
     <Button
         android:id="@+id/addNewContactButton"
@@ -15,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="15dp"
-        android:background="@drawable/button_blue"
+        android:background="@drawable/button_aqua"
         android:onClick="addNewClicked"
         android:text="@string/add_new" />
 
@@ -26,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="15dp"
-        android:background="@drawable/button_blue"
+        android:background="@drawable/button_aqua"
         android:onClick="viewContactsClicked"
         android:text="@string/view_all" />
 
@@ -34,25 +41,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_gravity="center">
 
-        <ImageView
-            android:id="@+id/imageView6"
-            android:layout_width="125dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/abc_vector_test"
-            android:contentDescription="@string/back_arrow" />
-
-        <Button
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="12dp"
-            android:background="@drawable/button_red"
+            android:gravity="end"
+            android:background="@drawable/button_back"
             android:onClick="onBackPressed"
-            android:padding="16dp"
-            android:text="Back"
+            android:text="@string/back"
             android:textColor="#FFFFFF"
             android:textSize="32sp" />
     </LinearLayout>

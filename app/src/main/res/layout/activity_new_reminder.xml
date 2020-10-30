@@ -7,13 +7,13 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorOldBG"
+        android:background="@color/BGcolor"
         android:orientation="vertical"
         tools:context=".NewReminderActivity">
 
         <TextView
             android:id="@+id/textView"
-            style="@style/ColorTheme"
+            style="@style/ColorThemeTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -22,10 +22,11 @@
 
         <EditText
             android:id="@+id/alarmLabel"
-            style="@style/ColorTheme"
+            style="@style/ColorThemeInput"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:background="@drawable/edittext_style"
             android:ems="10"
             android:focusableInTouchMode="false"
             android:inputType="textPersonName"
@@ -34,8 +35,7 @@
             tools:ignore="LabelFor" />
 
         <TextView
-            android:id="@+id/textView2"
-            style="@style/ColorTheme"
+            style="@style/ColorThemeTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -57,22 +57,24 @@
                 android:padding="8dp" />
 
             <TextView
-                style="@style/ColorTheme"
+                style="@style/ColorThemeBlue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/time_divider" />
 
             <EditText
                 android:id="@+id/minutesEditText"
-                style="@style/ColorTheme"
+                style="@style/ColorThemeInput"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/edittext_style"
                 android:ems="2"
                 android:inputType="number"
                 android:maxLength="2"
                 android:text="@string/_00"
                 android:autofillHints="Enter minutes"
-                tools:ignore="LabelFor" />
+                tools:ignore="LabelFor"
+                android:focusableInTouchMode="false" />
             <!--<Spinner
                 android:id="@+id/minutesSpinner"
                 android:layout_width="match_parent"
@@ -87,36 +89,38 @@
                 <RadioGroup
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="26dp"
                     tools:ignore="UselessParent">
 
                     <RadioButton
                         android:id="@+id/amRadio"
-                        style="@style/ColorTheme"
+                        style="@style/ColorThemeBlue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:padding="0dp"
                         android:text="@string/am" />
 
                     <RadioButton
                         android:id="@+id/pmRadio"
-                        style="@style/ColorTheme"
+                        style="@style/ColorThemeBlue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:padding="0dp"
                         android:text="@string/pm" />
                 </RadioGroup>
             </LinearLayout>
         </LinearLayout>
 
         <TextView
+            style="@style/ColorThemeBlue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="bottom"
-            android:paddingTop="16dp"
-            android:text="@string/on_these_days"
-            android:textColor="#FFFFFF"
-            android:textSize="32sp" />
+            android:layout_marginTop="26dp"
+            android:text="@string/on_these_days" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -126,7 +130,7 @@
 
             <CheckBox
                 android:id="@+id/sunCheckBox"
-                style="@style/ColorTheme"
+                style="@style/ColorThemeBlue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="0dp"
@@ -134,7 +138,7 @@
 
             <CheckBox
                 android:id="@+id/monCheckBox"
-                style="@style/ColorTheme"
+                style="@style/ColorThemeBlue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="0dp"
@@ -142,7 +146,7 @@
 
             <CheckBox
                 android:id="@+id/tueCheckBox"
-                style="@style/ColorTheme"
+                style="@style/ColorThemeBlue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="0dp"
@@ -150,7 +154,7 @@
 
             <CheckBox
                 android:id="@+id/wedCheckBox"
-                style="@style/ColorTheme"
+                style="@style/ColorThemeBlue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="0dp"
@@ -158,7 +162,7 @@
 
             <CheckBox
                 android:id="@+id/thursCheckBox"
-                style="@style/ColorTheme"
+                style="@style/ColorThemeBlue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="0dp"
@@ -166,7 +170,7 @@
 
             <CheckBox
                 android:id="@+id/friCheckBox"
-                style="@style/ColorTheme"
+                style="@style/ColorThemeBlue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="0dp"
@@ -174,7 +178,7 @@
 
             <CheckBox
                 android:id="@+id/satCheckBox"
-                style="@style/ColorTheme"
+                style="@style/ColorThemeBlue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="0dp"
@@ -220,6 +224,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="@color/colorBlue"
+        android:background="@color/colorSkyBlue"
         android:orientation="vertical" />
 </FrameLayout>

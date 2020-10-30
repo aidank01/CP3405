@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/BGcolor"
+    android:id="@+id/scroller">
+    <!--android:fillViewport="true"-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/blue">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:text="@string/emergency_medical_info"
+            android:textColor="@color/blue"
+            android:background="@color/BGcolor"
+            android:textSize="34sp"
+            android:textStyle="bold" />
+
+        <TableRow
+            android:background="@color/BGcolor">
+            <TextView/>
+        </TableRow>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/current_medical_conditions"
+            android:labelFor="@id/conditions"
+            android:textColor="@color/white"
+            android:textSize="30sp"/>
+
+        <EditText
+            android:id="@+id/conditions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittext_style"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="12dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textSize="28sp"
+            android:focusableInTouchMode="false"
+            android:autofillHints="types of medical conditions"
+            android:inputType="text" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/allergies"
+            android:labelFor="@id/allergies"
+            android:textColor="@color/white"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/allergies"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittext_style"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="12dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textSize="28sp"
+            android:focusableInTouchMode="false"
+            android:autofillHints="types of allergies"
+            android:inputType="text" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/current_medications"
+            android:labelFor="@id/medications"
+            android:textColor="@color/white"
+            android:textSize="30sp"/>
+
+        <EditText
+            android:id="@+id/medications"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittext_style"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="12dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textSize="28sp"
+            android:focusableInTouchMode="false"
+            android:autofillHints="types of medications"
+            android:inputType="text" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/blood_type"
+            android:labelFor="@+id/bloodType"
+            android:textColor="@color/white"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/bloodType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittext_style"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="10dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textSize="28sp"
+            android:focusableInTouchMode="false"
+            android:autofillHints="blood type"
+            android:inputType="text" />
+
+        <TableRow
+            android:background="@color/BGcolor"><TextView/></TableRow>
+
+        <TableRow
+            android:background="@color/BGcolor">
+
+            <TextView
+                android:id="@+id/eContact1"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_blue"
+                android:gravity="center_horizontal"
+                android:onClick="findContactClicked"
+                android:text="@string/tap_emergency_contact"
+                android:textColor="@color/white"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/eContact2"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="2dp"
+                android:gravity="center_horizontal"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                android:text="@string/tap_emergency_contact"
+                android:background="@drawable/button_blue"
+                android:onClick="findContactClicked" />
+        </TableRow>
+
+        <TableRow
+            android:background="@color/BGcolor">
+            <TextView/>
+        </TableRow>
+
+        <TableRow
+            android:background="@color/BGcolor">
+            <Button
+                android:id="@+id/cancelButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/button_red"
+                android:text="@string/cancel"
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                android:onClick="onBackPressed"
+                tools:ignore="ButtonStyle" />
+
+            <Button
+                android:id="@+id/saveButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/button_green"
+                android:text="@string/save"
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                android:onClick="saveClicked"
+                tools:ignore="ButtonStyle" />
+        </TableRow>
+    </TableLayout>
+
+        <TextView
+            android:id="@+id/keyboardFiller"
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
+    </LinearLayout>
+</ScrollView>
+
+    <au.edu.jcu.cp3405.prototype.CustomKeyboard
+        android:id="@+id/keyboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/colorSkyBlue"
+        android:orientation="vertical"
+        android:visibility="gone" />
+</FrameLayout>

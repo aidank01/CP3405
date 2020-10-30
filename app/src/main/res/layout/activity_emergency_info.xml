@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/BGcolor"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:text="@string/emergency_medical_info"
+        android:textColor="@color/blue"
+        android:textSize="26sp"
+        android:textStyle="bold" />
+
+    <!--Main info-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blue"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            style="@style/ColorTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@id/conditions"
+            android:text="@string/current_medical_conditions"
+            android:textSize="26sp" />
+
+        <TextView
+            android:id="@+id/conditions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
+            android:background="@drawable/viewtext_style"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:ems="15"
+            android:textSize="26sp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            style="@style/ColorTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@id/allergies"
+            android:text="@string/allergies"
+            android:textSize="26sp" />
+
+        <TextView
+            android:id="@+id/allergies"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
+            android:background="@drawable/viewtext_style"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:ems="20"
+            android:textSize="26sp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            style="@style/ColorTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@id/medications"
+            android:text="@string/current_medications"
+            android:textSize="26sp" />
+
+        <TextView
+            android:id="@+id/medications"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
+            android:background="@drawable/viewtext_style"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:ems="20"
+            android:textSize="26sp" />
+
+        <TextView
+            android:id="@+id/textView4"
+            style="@style/ColorTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@id/bloodType"
+            android:text="@string/blood_type"
+            android:textSize="26sp" />
+
+        <TextView
+            android:id="@+id/bloodType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
+            android:background="@drawable/viewtext_style"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:ems="20"
+            android:textSize="26sp" />
+    </LinearLayout>
+
+    <!--Emergency Contacts-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingTop="4dp"
+            android:paddingBottom="8dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/button_blue"
+            android:onClick="callClicked">
+
+            <TextView
+                android:id="@+id/eContactName1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
+
+            <ImageView
+                android:id="@+id/eContactImage1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/phone"
+                android:contentDescription="@string/picture_of_contact" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingTop="4dp"
+            android:paddingBottom="8dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/button_blue">
+
+            <TextView
+                android:id="@+id/eContactName2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
+
+            <ImageView
+                android:id="@+id/eContactImage2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/phone"
+                android:contentDescription="@string/picture_of_contact" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            style="@style/ColorTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/button_red"
+            android:onClick="onBackPressed"
+            android:text="@string/back" />
+    <Button
+        style="@style/ColorTheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/button_aqua"
+        android:onClick="editEmergencyContact"
+        android:text="@string/edit" />
+    </LinearLayout>
+</LinearLayout>

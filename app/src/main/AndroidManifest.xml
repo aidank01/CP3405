@@ -9,6 +9,8 @@
     <uses-permission android:name="com.android.reminder.permission.SET_ALARM" />
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
 
     <application
         android:name=".SoundManager"
@@ -18,6 +20,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".NewMessageActivity"></activity>
+        <activity android:name=".MessagingActivity" />
+        <activity android:name=".FlashlightActivity" />
+        <activity android:name=".InCallActivity" />
+        <activity android:name=".ContactViewActivity" />
+        <activity
+            android:name=".NewEmergencyInfoActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".EmergencyInfoActivity" />
         <activity android:name=".ViewRemindersActivity" />
         <activity android:name=".CalendarActivity" />
         <activity android:name=".NewCalendarActivity" />
@@ -25,9 +36,10 @@
         <activity android:name=".NewReminderActivity" />
         <activity android:name=".PhoneActivity" />
         <activity android:name=".ClockActivity" />
-        <activity android:name=".ListContactsActivity" />
+        <activity android:name=".ViewContactsActivity" />
         <activity android:name=".ContactsActivity" />
-        <activity android:name=".AddContactActivity"
+        <activity
+            android:name=".NewContactActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".MainActivity">
             <intent-filter>

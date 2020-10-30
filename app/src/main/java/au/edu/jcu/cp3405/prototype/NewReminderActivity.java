@@ -15,13 +15,14 @@ import android.text.method.DigitsKeyListener;
 import android.text.method.KeyListener;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -48,7 +49,6 @@ public class NewReminderActivity extends AppCompatActivity {
     CheckBox chkFri;
     CheckBox chkSat;
     CheckBox chkSun;
-
     CustomKeyboard keyboard;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -84,11 +84,25 @@ public class NewReminderActivity extends AppCompatActivity {
         // Make the custom keyboard appear
         textInput.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
-                hideDefaultKeyboard(v);
+                keyboard.setLettersKeyboard();
                 showCustomKeyboard((EditText) v);
                 setFocus((EditText) v);
             }
         });
+        minText.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                keyboard.setNumKeyboard();
+                if (minText.getText().toString().equals("00")) {
+                    minText.setText("");
+                }
+                showCustomKeyboard((EditText) v);
+                setFocus((EditText) v);
+            }
+        });
+
+        // pass the InputConnection from the EditText to the keyboard
+        InputConnection ic = textInput.onCreateInputConnection(new EditorInfo());
+        keyboard.setInputConnection(ic);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -140,7 +154,11 @@ public class NewReminderActivity extends AppCompatActivity {
         minText.setKeyListener(keyListener);
         if(min > 59) {
             minText.setText(0);
-            Toast.makeText(this, "Invalid minutes", Toast.LENGTH_LONG).show();
+            Toast toast = Toast.makeText(this, "Invalid minutes", Toast.LENGTH_LONG);
+            ViewGroup group = (ViewGroup) toast.getView();
+            TextView messageTextView = (TextView) group.getChildAt(0);
+            messageTextView.setTextSize(30);
+            toast.show();
         }
 
         RadioButton pmRadio = findViewById(R.id.pmRadio);
@@ -226,8 +244,13 @@ public class NewReminderActivity extends AppCompatActivity {
         assert myAlarmManager != null;
         myAlarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calSet.getTimeInMillis(), 24*60*60*1000, myPendingIntent);
         //check
-        set("AlarmLabel", reminder.getLabel());
-        Toast.makeText(this, "Alarm set", Toast.LENGTH_LONG).show();
+        //set("AlarmLabel", reminder.getLabel());
+        set("AlarmId", String.valueOf(reminder.getId()));
+        Toast toast = Toast.makeText(this, "Reminder set", Toast.LENGTH_LONG);
+        ViewGroup group = (ViewGroup) toast.getView();
+        TextView messageTextView = (TextView) group.getChildAt(0);
+        messageTextView.setTextSize(30);
+        toast.show();
         Log.d("NewReminder", "ALARM: "+reminder.getId()+" -SET======================================================================");
         onBackPressed();
     }
@@ -257,10 +280,11 @@ public class NewReminderActivity extends AppCompatActivity {
 
     public void onBackPressed(View view) {
         soundManager.playSound(SoundManager.CANCEL);
+        if( isCustomKeyboardVisible() ) hideCustomKeyboard(); else this.finish();
         onBackPressed();
     }
 
-    public void hideDefaultKeyboard(View view) {
+    /*public void hideDefaultKeyboard(View view) {
         // this will give us the view which is currently focus in this layout
         //View view = this.getCurrentFocus();
         // if nothing is currently focus then this will protect the app from crash
@@ -270,11 +294,11 @@ public class NewReminderActivity extends AppCompatActivity {
             assert imm != null;
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
-    }
+    }*/
 
     public void setFocus(EditText view) {
-        view.setBackgroundColor(getResources().getColor(R.color.colorBlue));
-        if (previousField != null) { previousField.setBackgroundColor(getResources().getColor(R.color.colorOldBG)); }
+        view.setBackground(getResources().getDrawable(R.drawable.edittext_focus_style));
+        if (previousField != null && previousField != view) { previousField.setBackground(getResources().getDrawable(R.drawable.edittext_style)); }
         previousField = view;
     }
 
@@ -283,5 +307,13 @@ public class NewReminderActivity extends AppCompatActivity {
         keyboard.setEnabled(true);
         InputConnection ic = editText.onCreateInputConnection(new EditorInfo());
         keyboard.setInputConnection(ic);
+    }
+
+    public void hideCustomKeyboard() {
+        keyboard.setVisibility(View.GONE);
+        keyboard.setEnabled(false);
+    }
+    public boolean isCustomKeyboardVisible() {
+        return keyboard.getVisibility() == View.VISIBLE;
     }
 }

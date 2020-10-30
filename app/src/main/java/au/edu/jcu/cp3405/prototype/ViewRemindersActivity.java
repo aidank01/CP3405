@@ -10,7 +10,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
@@ -22,10 +21,11 @@ import java.util.List;
 
 import static au.edu.jcu.cp3405.prototype.NewReminderActivity.MyPREFERENCES;
 
-public class ViewRemindersActivity extends AppCompatActivity {
+public class ViewRemindersActivity extends AppCompatActivity implements StateListener {
     SoundManager soundManager;
     SharedPreferences sharedpreferences;
     List<Reminder> reminderList = new ArrayList<>();
+    ReminderAdapter reminderAdapter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +49,9 @@ public class ViewRemindersActivity extends AppCompatActivity {
                 }
             }
 
-            final ReminderAdapter reminderAdapter = new ReminderAdapter(this, reminderList);
+            reminderAdapter = new ReminderAdapter(this, reminderList);
             reminderView.setAdapter(reminderAdapter);
-            reminderView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            /*reminderView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, final View view, final int position, long id) {
                     view.animate().setDuration(2000).alpha(0)
@@ -65,7 +65,16 @@ public class ViewRemindersActivity extends AppCompatActivity {
                             });
                 }
 
-            });
+            });*/
+        }
+    }
+
+    @Override
+    public void onUpdate(State state, Object position) {
+        if (state == State.UPDATE_REMINDERS) {
+            deleteReminder((int) position);
+            getList();
+            reminderAdapter.notifyDataSetChanged();
         }
     }
 

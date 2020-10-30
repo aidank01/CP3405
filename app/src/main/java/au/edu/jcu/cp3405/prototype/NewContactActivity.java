@@ -7,30 +7,29 @@ import android.content.ContentProviderResult;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class AddContactActivity extends AppCompatActivity {
+public class NewContactActivity extends AppCompatActivity {
     Context context;
     SoundManager soundManager;
     CustomKeyboard keyboard;
     EditText previousField;
+    ScrollView scrollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_addcontacts);
+        setContentView(R.layout.activity_new_contacts);
         context = this;
         soundManager = (SoundManager) getApplicationContext();
 
@@ -38,13 +37,16 @@ public class AddContactActivity extends AppCompatActivity {
 
         EditText contactName = findViewById(R.id.contactName);
         EditText contactNumber = findViewById(R.id.contactPhone);
-        final EditText contactEmail = findViewById(R.id.contactEmail);
+        EditText contactEmail = findViewById(R.id.contactEmail);
+        EditText contactAddress = findViewById(R.id.contactAddress);
+        scrollView = findViewById(R.id.scroller);
         keyboard = findViewById(R.id.keyboard);
         setFocus(contactName);
 
         // Make the custom keyboard appear
         contactName.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
+            @Override
+            public void onClick(View v) {
                 //hideDefaultKeyboard((EditText) v);
                 keyboard.setLettersKeyboard();
                 showCustomKeyboard((EditText) v);
@@ -52,52 +54,42 @@ public class AddContactActivity extends AppCompatActivity {
             }
         });
         contactNumber.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
+            @Override
+            public void onClick(View v) {
                 //hideDefaultKeyboard((EditText) v);
                 keyboard.setNumKeyboard();
                 showCustomKeyboard((EditText) v);
                 setFocus((EditText) v);
+                scrollView.smoothScrollTo(0, 500);
             }
         });
         contactEmail.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
+            @Override
+            public void onClick(View v) {
                 //hideDefaultKeyboard((EditText) v);
                 keyboard.setLettersKeyboard();
                 showCustomKeyboard((EditText) v);
                 setFocus((EditText) v);
+                scrollView.smoothScrollTo(0, 800);
             }
         });
-
-        /*contactNumber.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override public void onFocusChange(View v, boolean hasFocus) {
-                hideDefaultKeyboard((EditText) v);
+        contactAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //hideDefaultKeyboard((EditText) v);
+                keyboard.setLettersKeyboard();
                 showCustomKeyboard((EditText) v);
+                setFocus((EditText) v);
+                scrollView.smoothScrollTo(0, 800);
             }
         });
-        contactEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override public void onFocusChange(View v, boolean hasFocus) {
-                hideDefaultKeyboard((EditText) v);
-                showCustomKeyboard((EditText) v);
-                if (hasFocus) {
-                }
-                v.setBackgroundColor(getResources().getColor(R.color.colorOldBG));
-                Log.d("FocusChange", v + "======================================================");
-            }
-        });
-        contactName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override public void onFocusChange(View v, boolean hasFocus) {
-                hideDefaultKeyboard((EditText) v);
-                showCustomKeyboard((EditText) v);
-                v.setBackgroundColor(getResources().getColor(R.color.colorBlue));
-            }
-        });*/
 
         // pass the InputConnection from the EditText to the keyboard
         InputConnection ic = contactName.onCreateInputConnection(new EditorInfo());
         keyboard.setInputConnection(ic);
     }
 
-    public void saveContact(View view) {
+    public void saveContactClicked(View view) {
         //Todo: Check input
         EditText input = findViewById(R.id.contactName);
         String name = input.getText().toString();
@@ -174,8 +166,10 @@ public class AddContactActivity extends AppCompatActivity {
     }
 
     public void setFocus(EditText view) {
-        view.setBackgroundColor(getResources().getColor(R.color.colorBlue));
-        if (previousField != null) { previousField.setBackgroundColor(getResources().getColor(R.color.colorOldBG)); }
+        view.setBackground(getResources().getDrawable(R.drawable.edittext_focus_style));
+        if (previousField != null && previousField != view) {
+            previousField.setBackground(getResources().getDrawable(R.drawable.edittext_style));
+        }
         previousField = view;
     }
 

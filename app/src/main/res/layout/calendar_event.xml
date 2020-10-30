@@ -3,15 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/colorOldBG">
+    android:background="@color/BGcolor">
 
     <TextView
         android:id="@+id/textViewEventTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="32dp"
-        android:textColor="#FFFFFF"
-        android:text="Event 1" />
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:textSize="32sp"
+        android:textColor="@color/blue"
+        android:text="@string/event_1" />
 
     <TextView
         android:id="@+id/textViewTime"
@@ -19,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
         android:textSize="30sp"
-        android:textColor="#FFFFFF"
-        android:text="10:00am" />
+        android:textColor="@color/blue"
+        android:text="@string/_10_00am" />
 
 </LinearLayout>

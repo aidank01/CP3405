@@ -3,38 +3,35 @@ package au.edu.jcu.cp3405.prototype;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentResolver;
+import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
-public class ListContactsActivity extends AppCompatActivity implements StateListener {
+public class NewMessageActivity extends AppCompatActivity {
+    Context context;
     SoundManager soundManager;
     ArrayList<Contact> arrayOfContacts;
     ListView listView;
+    ContactsAdapter adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_contacts);
-
+        setContentView(R.layout.activity_new_message);
+        context = this;
         soundManager = (SoundManager) getApplicationContext();
-
         listView = findViewById(R.id.contactListView);
         getAllContacts();
-    }
-
-    @Override
-    public void onUpdate(State state) {
-        switch (state) {
-            case UPDATE_CONTACTS:
-                getAllContacts();
-                break;
-        }
     }
 
     private void getAllContacts() {
@@ -56,16 +53,24 @@ public class ListContactsActivity extends AppCompatActivity implements StateList
                     assert pCur != null;
                     while (pCur.moveToNext()) {
                         phoneNo = pCur.getString(pCur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                        Log.e("phone", phoneNo);
                         if (phoneNo.length() > 0)
                             contact.setPhone(phoneNo);
                     }
                     pCur.close();
                 }
                 arrayOfContacts.add(contact);
+                Collections.sort(arrayOfContacts, new SortBasedOnName());
             }
-            ContactsAdapter adapter = new ContactsAdapter(this, arrayOfContacts);
+            adapter = new ContactsAdapter(this, arrayOfContacts);
             listView.setAdapter(adapter);
+
+            //Doesn't work
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Log.e("ItemClick", "CLICKED========================================");
+                }
+            });
         }
         if (cur != null) {
             cur.close();
@@ -73,7 +78,7 @@ public class ListContactsActivity extends AppCompatActivity implements StateList
     }
 
     public void onBackPressed(View view) {
-        soundManager.playSound(SoundManager.CANCEL);
+        soundManager.playSound(SoundManager.NEUTRAL);
         onBackPressed();
     }
 }

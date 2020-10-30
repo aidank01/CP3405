@@ -9,10 +9,12 @@
     tools:context=".ReminderAlertActivity">
 
     <TextView
+        style="@style/ColorThemeInput"
         android:id="@+id/reminderAlertView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="REMINDER!!"
+        android:gravity="center"
+        android:text="@string/reminder"
         android:textSize="42sp"
         tools:layout_editor_absoluteX="150dp"
         tools:layout_editor_absoluteY="264dp" />
@@ -25,7 +27,18 @@
         android:background="@drawable/button_red"
         android:onClick="onBackPressed"
         android:padding="16dp"
-        android:text="Dismiss"
-        android:textColor="#FFFFFF"
+        android:text="@string/dismiss"
+        android:textColor="@color/white"
+        android:textSize="32sp" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="12dp"
+        android:background="@drawable/button_aqua"
+        android:onClick="onSnoozePressed"
+        android:padding="16dp"
+        android:text="@string/snooze"
+        android:textColor="@color/white"
         android:textSize="32sp" />
 </androidx.appcompat.widget.LinearLayoutCompat>
