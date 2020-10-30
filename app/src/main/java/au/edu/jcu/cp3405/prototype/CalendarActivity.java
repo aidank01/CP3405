@@ -1,10 +1,5 @@
 package au.edu.jcu.cp3405.prototype;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.ContentResolver;
@@ -20,30 +15,26 @@ import android.provider.CalendarContract;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.CalendarView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.Month;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
 public class CalendarActivity extends AppCompatActivity {
     private static final int REQUEST_ACCESS_CALENDAR = 222;
-    private static final String TAG = "CalendarActivity";
     private static final String GOOGLE_USERNAME = "sebastianwilde22@gmail.com";
     Context context;
     SoundManager soundManager;
-    long now;
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,17 +42,8 @@ public class CalendarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_calendar);
         context = this;
         soundManager = (SoundManager) getApplicationContext();
-        now = new Date().getTime();
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(now);
-        String nowString = dateFormat.format(calendar.getTime());
-        Date selectedDate = null;
-        try {
-            selectedDate = dateFormat.parse(nowString);
-        } catch (java.text.ParseException e) {
-            e.printStackTrace();
-        }
-        long millis = selectedDate.getTime();
+
+        long millis = new Date().getTime();
 
         boolean hasPermissionContacts = (ContextCompat.checkSelfPermission(getApplicationContext(),
                 Manifest.permission.READ_CALENDAR) == PackageManager.PERMISSION_GRANTED);
@@ -71,39 +53,23 @@ public class CalendarActivity extends AppCompatActivity {
         } else {
             try {
                 readEvents(context, millis);
-            } catch (java.text.ParseException e) {
+            } catch (ParseException e) {
                 e.printStackTrace();
             }
         }
 
         CalendarView mCalendarView = findViewById(R.id.calendarView);
-        //Change Month Text Size
-        /*ViewGroup vg = (ViewGroup) mCalendarView.getChildAt(0);
-        View child = vg.getChildAt(0);
 
-        if(child instanceof TextView) {
-            ((TextView)child).setTextSize(24);
-            Log.d("CalendarView", "Change Text Size==========================================");
-        }*/
         mCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
-            public void onSelectedDayChange(@NonNull CalendarView CalendarView, int year, int month, int dayOfMonth) {
+            public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int dayOfMonth) {
                 soundManager.playSound(SoundManager.NEUTRAL);
-                String dateString = dayOfMonth + "/" + (month + 1) + "/" + year;
-                Date selectedDate = null;
-                try {
-                    selectedDate = dateFormat.parse(dateString);
-                } catch (java.text.ParseException e) {
-                    e.printStackTrace();
-                }
-                long millis = selectedDate.getTime();
-                Log.d("OnSelectedDateChange", "Day" + selectedDate.getDay() + "=====================================");
-                /*Intent intent = new Intent(CalendarActivity.this, CalendarCompleteActivity.class);
-                intent.putExtra("date",date);
-                startActivity(intent);*/
+
+                long millis = calendarView.getDate();
+
                 try {
                     readEvents(context, millis);
-                } catch (java.text.ParseException e) {
+                } catch (ParseException e) {
                     e.printStackTrace();
                 }
             }
@@ -131,7 +97,7 @@ public class CalendarActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void readEvents(Context context, long selectedDate) throws ParseException, java.text.ParseException {
+    public void readEvents(Context context, long selectedDate) {
         ListView eventView = findViewById(R.id.eventListView);
 
         ContentResolver contentResolver = context.getContentResolver();
@@ -155,12 +121,11 @@ public class CalendarActivity extends AppCompatActivity {
                 new String[]{"title", "begin", "end", "allDay"}, null,
                 null, "startDay ASC, startMinute ASC");
 
-        System.out.println("eventCursor count=" + eventCursor.getCount());
         builder.clearQuery();
 
         // If there are actual events in the current calendar, the count will exceed zero
-        if(eventCursor.getCount()>0)
-        {
+        if (eventCursor != null && eventCursor.getCount() > 0) {
+            System.out.println("eventCursor count=" + eventCursor.getCount());
             // Create a list of calendar events for the specific calendar
             List<CalendarEvent> eventList = new ArrayList<>();
 
@@ -175,8 +140,7 @@ public class CalendarActivity extends AppCompatActivity {
             eventList.add(ce);
 
             // While there are more events in the current calendar, move to the next instance
-            while (eventCursor.moveToNext())
-            {
+            while (eventCursor.moveToNext()) {
                 // Adds the object to the list of events
                 ce = loadEvent(eventCursor);
                 eventList.add(ce);
@@ -198,13 +162,13 @@ public class CalendarActivity extends AppCompatActivity {
 
     private long findCalendar() {
         String[] projection = new String[]{
-                        CalendarContract.Calendars._ID,
-                        CalendarContract.Calendars.NAME,
-                        CalendarContract.Calendars.ACCOUNT_NAME,
-                        CalendarContract.Calendars.ACCOUNT_TYPE};
+                CalendarContract.Calendars._ID,
+                CalendarContract.Calendars.NAME,
+                CalendarContract.Calendars.ACCOUNT_NAME,
+                CalendarContract.Calendars.ACCOUNT_TYPE};
         @SuppressLint("MissingPermission") Cursor calCursor = getContentResolver().
-                        query(CalendarContract.Calendars.CONTENT_URI, projection,CalendarContract.Calendars.VISIBLE + " = 1",
-                                null,CalendarContract.Calendars._ID + " ASC");
+                query(CalendarContract.Calendars.CONTENT_URI, projection, CalendarContract.Calendars.VISIBLE + " = 1",
+                        null, CalendarContract.Calendars._ID + " ASC");
         if (calCursor.moveToFirst()) {
             do {
                 long id = calCursor.getLong(0);

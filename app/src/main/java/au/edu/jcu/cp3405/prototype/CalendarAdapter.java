@@ -10,8 +10,8 @@ import android.widget.TextView;
 import java.util.List;
 
 public class CalendarAdapter extends BaseAdapter {
-    private Context context;
-    private List<CalendarEvent> events;
+    private final Context context;
+    private final List<CalendarEvent> events;
 
     CalendarAdapter(Context context, List<CalendarEvent> events) {
         this.context = context;
