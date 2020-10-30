@@ -35,8 +35,8 @@ public class ContactsAdapter extends ArrayAdapter<Contact> {
         TextView contactName = convertView.findViewById(R.id.nameItem);
         TextView contactNumber = convertView.findViewById(R.id.numberItem);
         assert contact != null;
-        contactName.setText(contact.name);
-        contactNumber.setText(contact.mobileNum);
+        contactName.setText(contact.getName());
+        contactNumber.setText(contact.getPhone());
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override

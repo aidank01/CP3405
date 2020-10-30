@@ -42,8 +42,8 @@ public class ContactsAdvAdapter extends ArrayAdapter<Contact> {
         Button selectButton = convertView.findViewById(R.id.callButton);
         Button deleteButton = convertView.findViewById(R.id.deleteButton);
         assert contact != null;
-        contactName.setText(contact.name);
-        contactNumber.setText(contact.mobileNum);
+        contactName.setText(contact.getName());
+        contactNumber.setText(contact.getPhone());
 
         selectButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +55,7 @@ public class ContactsAdvAdapter extends ArrayAdapter<Contact> {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (deleteContact(getContext(), contact.mobileNum, contact.name)) {
+                if (deleteContact(getContext(), contact.getPhone(), contact.getName())) {
                     Toast toast = Toast.makeText(context, "Contact deleted.", Toast.LENGTH_LONG);
                     ViewGroup group = (ViewGroup) toast.getView();
                     TextView messageTextView = (TextView) group.getChildAt(0);
